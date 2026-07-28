@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import "./App.css";
+import ChatLauncher from "./components/ChatWidget/ChatLauncher";
 
 const CONFIG = {
   videos: {
@@ -1096,6 +1097,8 @@ function App() {
           )}
         </div>
       </div>
+
+      <ChatLauncher />
     </>
   );
 }

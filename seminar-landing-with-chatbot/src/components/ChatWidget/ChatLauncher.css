@@ -1,0 +1,43 @@
+.chat-fab {
+  position: fixed;
+  bottom: 26px;
+  right: 26px;
+  z-index: 100;
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: var(--cyan);
+  color: #03141b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 10px 30px -8px rgba(35, 213, 255, 0.55);
+  transition: transform 0.25s ease;
+}
+.chat-fab:hover {
+  transform: translateY(-3px);
+}
+.chat-fab svg {
+  width: 24px;
+  height: 24px;
+}
+
+.chat-fab-pulse {
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 1.5px solid var(--cyan);
+  opacity: 0.5;
+  animation: fabPulse 2.4s ease-out infinite;
+  pointer-events: none;
+}
+@keyframes fabPulse {
+  0% {
+    transform: scale(0.9);
+    opacity: 0.6;
+  }
+  100% {
+    transform: scale(1.35);
+    opacity: 0;
+  }
+}
