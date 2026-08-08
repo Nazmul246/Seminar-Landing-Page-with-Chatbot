@@ -843,8 +843,8 @@ function App() {
               <div className="viz-gear">
                 <svg
                   viewBox="0 0 100 100"
-                  width="120"
-                  height="120"
+                  width="160"
+                  height="160"
                   fill="none"
                   stroke="var(--cyan-dim)"
                   strokeWidth="4"

@@ -10,18 +10,37 @@ import {
 } from "./storage";
 import "./ChatPage.css";
 
+const SUGGESTIONS = [
+  "What is ThaiBiz360 ERP?",
+  "How does SoundCam AI detect failures?",
+  "Tell me about AI Vision Inspection",
+  "Can I book a live demo?",
+];
+
+function getGreeting() {
+  const h = new Date().getHours();
+  if (h < 5) return "Good night";
+  if (h < 12) return "Good morning";
+  if (h < 18) return "Good afternoon";
+  return "Good evening";
+}
+
 export default function ChatPage({ onClose }) {
   const [conversations, setConversations] = useState(loadConversations);
   const [activeId, setActiveId] = useState(() => loadActiveId() || null);
   const [input, setInput] = useState("");
   const [isThinking, setIsThinking] = useState(false);
-  const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [sidebarOpen, setSidebarOpen] = useState(
+    () => typeof window !== "undefined" && window.innerWidth > 780,
+  );
 
   const messagesEndRef = useRef(null);
   const textareaRef = useRef(null);
   const typeTimerRef = useRef(null);
 
   const active = conversations.find((c) => c.id === activeId) || null;
+  const hasMessages = !!(active && active.messages.length > 0);
+  const showLanding = !hasMessages && !isThinking;
 
   // persist conversations + active id
   useEffect(() => saveConversations(conversations), [conversations]);
@@ -156,12 +175,72 @@ export default function ChatPage({ onClose }) {
     }
   }
 
+  function handleSuggestionClick(text) {
+    setInput(text);
+    textareaRef.current?.focus();
+  }
+
   const sorted = [...conversations].sort((a, b) => b.updatedAt - a.updatedAt);
+
+  function renderInputBar() {
+    return (
+      <div className="chat-input-inner">
+        <textarea
+          ref={textareaRef}
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+          onKeyDown={handleKeyDown}
+          placeholder="Message Factory AI Assistant..."
+          rows={1}
+        />
+        <button
+          className="chat-send-btn"
+          onClick={handleSend}
+          disabled={!input.trim() || isThinking}
+          aria-label="Send message"
+        >
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+          >
+            <path d="M12 19V5M5 12l7-7 7 7" />
+          </svg>
+        </button>
+      </div>
+    );
+  }
 
   return (
     <div className="chat-page">
       {/* ---------------- Sidebar ---------------- */}
+      {sidebarOpen && (
+        <div
+          className="chat-sidebar-backdrop"
+          onClick={() => setSidebarOpen(false)}
+        />
+      )}
       <aside className={`chat-sidebar ${sidebarOpen ? "is-open" : ""}`}>
+        <div className="chat-sidebar-brand">
+          <span className="chat-sidebar-logo">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.8"
+            >
+              <path d="M12 2 2 7l10 5 10-5-10-5ZM2 17l10 5 10-5M2 12l10 5 10-5" />
+            </svg>
+          </span>
+          <div className="chat-sidebar-brand-text">
+            <div className="chat-sidebar-brand-name">Factory AI</div>
+            <div className="chat-sidebar-brand-sub">
+              Smart Factory Assistant
+            </div>
+          </div>
+        </div>
+
         <div className="chat-sidebar-top">
           <button className="chat-newchat-btn" onClick={handleNewChat}>
             <svg
@@ -184,7 +263,10 @@ export default function ChatPage({ onClose }) {
             <div
               key={c.id}
               className={`chat-history-item ${c.id === activeId ? "is-active" : ""}`}
-              onClick={() => setActiveId(c.id)}
+              onClick={() => {
+                setActiveId(c.id);
+                if (window.innerWidth <= 780) setSidebarOpen(false);
+              }}
             >
               <svg
                 viewBox="0 0 24 24"
@@ -193,7 +275,7 @@ export default function ChatPage({ onClose }) {
                 strokeWidth="1.8"
                 className="chat-history-icon"
               >
-                <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10z" />
               </svg>
               <span className="chat-history-title">{c.title}</span>
               <button
@@ -246,7 +328,7 @@ export default function ChatPage({ onClose }) {
             </svg>
           </button>
           <div className="chat-main-title">
-            {active ? active.title : "Factory AI Assistant"}
+            {hasMessages ? active.title : "Factory AI Assistant"}
           </div>
           <button className="chat-icon-btn" onClick={onClose} title="Close">
             <svg
@@ -260,102 +342,88 @@ export default function ChatPage({ onClose }) {
           </button>
         </header>
 
-        <div className="chat-messages">
-          {(!active || active.messages.length === 0) && !isThinking && (
-            <div className="chat-empty">
-              <span className="chat-empty-icon">
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="1.4"
-                >
-                  <path d="M12 2 2 7l10 5 10-5-10-5ZM2 17l10 5 10-5M2 12l10 5 10-5" />
-                </svg>
-              </span>
-              <h2>Factory AI Assistant</h2>
-              <p>
-                Ask about ERP, SoundCam, Vision Inspection, Predictive
-                Maintenance and more.
+        {showLanding ? (
+          <div className="chat-landing">
+            <div className="chat-landing-inner">
+              <h1 className="chat-landing-title">
+                {getGreeting()}
+                <span className="chat-landing-accent">.</span>
+              </h1>
+              <p className="chat-landing-subtitle">
+                What would you like to know about our smart factory systems?
               </p>
-            </div>
-          )}
 
-          <div className="chat-messages-inner">
-            {active?.messages.map((m) => (
-              <div key={m.id} className={`chat-row chat-row-${m.role}`}>
-                {m.role === "assistant" && (
-                  <span className="chat-avatar">
-                    <svg
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                    >
-                      <path d="M12 2 2 7l10 5 10-5-10-5ZM2 17l10 5 10-5M2 12l10 5 10-5" />
-                    </svg>
-                  </span>
-                )}
-                <div className="chat-text">
-                  {m.content}
-                  {m.typing && <span className="chat-caret"></span>}
-                </div>
-              </div>
-            ))}
+              <div className="chat-landing-input">{renderInputBar()}</div>
 
-            {isThinking && (
-              <div className="chat-row chat-row-assistant">
-                <span className="chat-avatar">
-                  <svg
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
+              <div className="chat-suggestions">
+                {SUGGESTIONS.map((s) => (
+                  <button
+                    key={s}
+                    className="chat-suggestion-chip"
+                    onClick={() => handleSuggestionClick(s)}
                   >
-                    <path d="M12 2 2 7l10 5 10-5-10-5ZM2 17l10 5 10-5M2 12l10 5 10-5" />
-                  </svg>
-                </span>
-                <div className="chat-typing">
-                  <i></i>
-                  <i></i>
-                  <i></i>
-                </div>
+                    {s}
+                  </button>
+                ))}
               </div>
-            )}
-            <div ref={messagesEndRef} />
+            </div>
           </div>
-        </div>
+        ) : (
+          <>
+            <div className="chat-messages">
+              <div className="chat-messages-inner">
+                {active?.messages.map((m) => (
+                  <div key={m.id} className={`chat-row chat-row-${m.role}`}>
+                    {m.role === "assistant" && (
+                      <span className="chat-avatar">
+                        <svg
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                        >
+                          <path d="M12 2 2 7l10 5 10-5-10-5ZM2 17l10 5 10-5M2 12l10 5 10-5" />
+                        </svg>
+                      </span>
+                    )}
+                    <div className="chat-text">
+                      {m.content}
+                      {m.typing && <span className="chat-caret"></span>}
+                    </div>
+                  </div>
+                ))}
 
-        <div className="chat-input-area">
-          <div className="chat-input-inner">
-            <textarea
-              ref={textareaRef}
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              onKeyDown={handleKeyDown}
-              placeholder="Message Factory AI Assistant..."
-              rows={1}
-            />
-            <button
-              className="chat-send-btn"
-              onClick={handleSend}
-              disabled={!input.trim() || isThinking}
-              aria-label="Send message"
-            >
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-              >
-                <path d="M12 19V5M5 12l7-7 7 7" />
-              </svg>
-            </button>
-          </div>
-          <div className="chat-input-hint">
-            AI responses may be inaccurate — verify important details.
-          </div>
-        </div>
+                {isThinking && (
+                  <div className="chat-row chat-row-assistant">
+                    <span className="chat-avatar">
+                      <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                      >
+                        <path d="M12 2 2 7l10 5 10-5-10-5ZM2 17l10 5 10-5M2 12l10 5 10-5" />
+                      </svg>
+                    </span>
+                    <div className="chat-typing">
+                      <i></i>
+                      <i></i>
+                      <i></i>
+                    </div>
+                  </div>
+                )}
+                <div ref={messagesEndRef} />
+              </div>
+            </div>
+
+            <div className="chat-input-area">
+              {renderInputBar()}
+              <div className="chat-input-hint">
+                AI responses may be inaccurate — verify important details.
+              </div>
+            </div>
+          </>
+        )}
       </main>
     </div>
   );
