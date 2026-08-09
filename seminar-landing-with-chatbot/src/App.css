@@ -15,7 +15,7 @@
   --red: #ff5470;
 
   --display: "Space Grotesk", sans-serif;
-  --mono: "JetBrains Mono", monospace;
+  --mono: "Inter", sans-serif;
   --body: "Inter", sans-serif;
 
   --edge: 14px;
@@ -511,7 +511,7 @@ h1.title .accent {
   display: block;
   font-size: 10px;
   letter-spacing: 0.18em;
-  color: var(--muted-dim);
+  color: var(--muted);
   text-transform: uppercase;
   margin-bottom: 6px;
 }
@@ -528,8 +528,8 @@ h1.title .accent {
 }
 
 .btn {
-  font-family: var(--mono);
-  font-size: 12.5px;
+  font-family: var(--display);
+  font-size: 14px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   padding: 15px 26px;
@@ -570,8 +570,8 @@ h1.title .accent {
   color: var(--cyan);
 }
 .btn svg {
-  width: 14px;
-  height: 14px;
+  width: 22px;
+  height: 22px;
 }
 
 .scrollcue {

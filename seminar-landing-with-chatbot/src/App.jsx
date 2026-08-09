@@ -1009,7 +1009,7 @@ function App() {
               target="_blank"
               rel="noopener"
               className="btn btn-primary"
-              style={{ padding: "19px 38px", fontSize: "13px" }}
+              style={{ padding: "16px 30px", fontSize: "16px" }}
             >
               Book a free demo
               <svg

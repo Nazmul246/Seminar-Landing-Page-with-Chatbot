@@ -17,12 +17,58 @@ const SUGGESTIONS = [
   "Can I book a live demo?",
 ];
 
-function getGreeting() {
+const SUBTITLES = [
+  "Ask about any of the 8 product channels from today's seminar.",
+  "From ThaiBiz360 ERP to Industrial IoT — what's on your line?",
+  "Ask me anything you saw on stage today, in more detail.",
+  "Which system fits your factory — ERP, SoundCam, or Vision?",
+  "I can also help you book a free demo before you leave.",
+];
+
+const GREETINGS_BY_TIME = {
+  night: [
+    "Still exploring the seminar?",
+    "Late-night deep dive",
+    "The floor's yours",
+  ],
+  morning: [
+    "Welcome to the seminar",
+    "Good morning, explore the channels",
+    "8 systems, one morning",
+  ],
+  afternoon: [
+    "Welcome to the seminar",
+    "Exploring the product channels?",
+    "Let's find your fit",
+  ],
+  evening: [
+    "Welcome to the seminar",
+    "Wrapping up today's sessions?",
+    "Still time to explore",
+  ],
+};
+
+function getTimeBucketKey() {
   const h = new Date().getHours();
-  if (h < 5) return "Good night";
-  if (h < 12) return "Good morning";
-  if (h < 18) return "Good afternoon";
-  return "Good evening";
+  if (h < 5) return "night";
+  if (h < 12) return "morning";
+  if (h < 18) return "afternoon";
+  return "evening";
+}
+
+// Same 2-minute window -> same pick, always. New window -> next pick in rotation.
+function pickFromWindow(list) {
+  const WINDOW_MS = 2 * 60 * 1000;
+  const bucket = Math.floor(Date.now() / WINDOW_MS);
+  return list[bucket % list.length];
+}
+
+function getGreeting() {
+  return pickFromWindow(GREETINGS_BY_TIME[getTimeBucketKey()]);
+}
+
+function getSubtitle() {
+  return pickFromWindow(SUBTITLES);
 }
 
 export default function ChatPage({ onClose }) {
@@ -41,6 +87,8 @@ export default function ChatPage({ onClose }) {
   const active = conversations.find((c) => c.id === activeId) || null;
   const hasMessages = !!(active && active.messages.length > 0);
   const showLanding = !hasMessages && !isThinking;
+  const [subtitle] = useState(getSubtitle);
+  const [greeting] = useState(getGreeting);
 
   // persist conversations + active id
   useEffect(() => saveConversations(conversations), [conversations]);
@@ -235,8 +283,9 @@ export default function ChatPage({ onClose }) {
           </span>
           <div className="chat-sidebar-brand-text">
             <div className="chat-sidebar-brand-name">Factory AI</div>
-            <div className="chat-sidebar-brand-sub">
-              Smart Factory Assistant
+            <div className="chat-sidebar-status">
+              <i className="chat-status-dot"></i>
+              System Online
             </div>
           </div>
         </div>
@@ -275,7 +324,9 @@ export default function ChatPage({ onClose }) {
                 strokeWidth="1.8"
                 className="chat-history-icon"
               >
-                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10z" />
+                <path d="M3 3v5h5" />
+                <path d="M3.05 13A9 9 0 1 0 6 5.3L3 8" />
+                <path d="M12 7v5l4 2" />
               </svg>
               <span className="chat-history-title">{c.title}</span>
               <button
@@ -344,14 +395,13 @@ export default function ChatPage({ onClose }) {
 
         {showLanding ? (
           <div className="chat-landing">
+            <div className="chat-grid-bg"></div>
             <div className="chat-landing-inner">
               <h1 className="chat-landing-title">
-                {getGreeting()}
+                {greeting}
                 <span className="chat-landing-accent">.</span>
               </h1>
-              <p className="chat-landing-subtitle">
-                What would you like to know about our smart factory systems?
-              </p>
+              <p className="chat-landing-subtitle">{subtitle}</p>
 
               <div className="chat-landing-input">{renderInputBar()}</div>
 
@@ -371,6 +421,7 @@ export default function ChatPage({ onClose }) {
         ) : (
           <>
             <div className="chat-messages">
+              <div className="chat-grid-bg"></div>
               <div className="chat-messages-inner">
                 {active?.messages.map((m) => (
                   <div key={m.id} className={`chat-row chat-row-${m.role}`}>
