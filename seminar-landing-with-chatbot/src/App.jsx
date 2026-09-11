@@ -4,8 +4,8 @@ import ChatLauncher from "./components/ChatWidget/ChatLauncher";
 
 const CONFIG = {
   videos: {
-    erp: "https://www.youtube.com/embed/VIDEO_ID_ERP",
-    soundcam: "https://www.youtube.com/embed/VIDEO_ID_SOUNDCAM",
+    erp: "https://www.youtube.com/embed/eRusZfCFyR8",
+    soundcam: "https://www.youtube.com/embed/cBYoJ1lnZF8",
     counting: "https://www.youtube.com/embed/VIDEO_ID_COUNTING",
     vision: "https://www.youtube.com/embed/VIDEO_ID_VISION",
     sealing: "https://www.youtube.com/embed/VIDEO_ID_SEALING",
@@ -551,7 +551,7 @@ function App() {
             </div>
           </div>
           <div className="panel reveal-r">
-            <div className="hud">
+            {/* <div className="hud">
               <span>MODULE / ERP-CORE</span>
               <span className="live">
                 <i></i>SYNCED
@@ -566,7 +566,11 @@ function App() {
               </div>
             </div>
             <div className="corner tl"></div>
-            <div className="corner br"></div>
+            <div className="corner br"></div> */}
+            <img
+              src="https://cdn.shopify.com/s/files/1/0710/8204/9605/files/ThaiBiz360_ERP.jpg?v=1789106039"
+              alt="ThaiBiz360 ERP Poster"
+            />
           </div>
         </div>
       </section>
@@ -615,19 +619,23 @@ function App() {
             </div>
           </div>
           <div className="panel reveal-l">
-            <div className="hud">
+            {/* <div className="hud">
               <span>MODULE / ACOUSTIC-01</span>
               <span className="live">
                 <i></i>LISTENING
               </span>
-            </div>
-            <canvas
+            </div> */}
+            {/* <canvas
               className="stage"
               ref={waveCanvasRef}
               style={{ position: "absolute" }}
-            ></canvas>
-            <div className="corner tl"></div>
-            <div className="corner br"></div>
+            ></canvas> */}
+            {/* <div className="corner tl"></div>
+            <div className="corner br"></div> */}
+            <img
+              src="https://cdn.shopify.com/s/files/1/0710/8204/9605/files/SoundCam.jpg?v=1789105486"
+              alt="Sound Cam Poster"
+            />
           </div>
         </div>
       </section>
