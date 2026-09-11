@@ -674,7 +674,7 @@ h1.title .accent {
   background: linear-gradient(160deg, var(--panel), var(--bg-2));
   border: 1px solid var(--line);
   border-radius: 4px;
-  /* aspect-ratio: 4/3; */
+  aspect-ratio: 4/3;
   position: relative;
   overflow: hidden;
 }
@@ -688,7 +688,8 @@ h1.title .accent {
   background-size: 22px 22px;
   opacity: 0.35;
 } */
-.panel {
+#soundcam .panel,
+#erp .panel {
   aspect-ratio: 0;
   border: 4px solid #23d5ff;
 }
