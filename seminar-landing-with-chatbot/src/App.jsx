@@ -227,6 +227,7 @@ function App() {
   // ---------------- Soundcam waveform ----------------
   useEffect(() => {
     const canvas = waveCanvasRef.current;
+    if (!canvas) return;
     const ctx = canvas.getContext("2d");
     let w,
       h,
