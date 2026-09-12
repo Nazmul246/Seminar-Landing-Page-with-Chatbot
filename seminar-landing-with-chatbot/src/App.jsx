@@ -474,9 +474,9 @@ function App() {
             </span>
           </h1>
           <p className="hero-sub reveal d2">
-            This is OpenAI's industrial AI showcase — ERP, Predictive Maintenance
-            and SoundCam, all running on a single factory AI stack. Everything you
-            saw on stage is live here, ready whenever you are.
+            This is OpenAI's industrial AI showcase — ERP, Predictive
+            Maintenance and SoundCam, all running on a single factory AI stack.
+            Everything you saw on stage is live here, ready whenever you are.
           </p>
 
           <div className="hero-meta reveal d3">
@@ -557,11 +557,7 @@ function App() {
                   <path d="M8 5v14l11-7z" />
                 </svg>
               </button>
-              <a
-                href="https://cdn.shopify.com/s/files/1/0710/8204/9605/files/ThaiBiz360_ERP.jpg?v=1789106039"
-                download
-                className="btn btn-outline"
-              >
+              <a href="/ThaiBiz360.jpg" download className="btn btn-outline">
                 Download brochure
                 <svg
                   viewBox="0 0 24 24"
@@ -591,10 +587,7 @@ function App() {
             </div>
             <div className="corner tl"></div>
             <div className="corner br"></div> */}
-            <img
-              src="https://cdn.shopify.com/s/files/1/0710/8204/9605/files/ThaiBiz360_ERP.jpg?v=1789106039"
-              alt="ThaiBiz360 ERP Poster"
-            />
+            <img src="/ThaiBiz360_4_3.jpg" alt="ThaiBiz360 ERP Poster" />
           </div>
         </div>
       </section>
@@ -613,7 +606,8 @@ function App() {
             <p className="ch-body reveal d2">
               Predictive Maintenance reads vibration and thermal signatures from
               every motor on the floor, and flags the exact moment a component
-              starts drifting from normal — days before a failure stops the line.
+              starts drifting from normal — days before a failure stops the
+              line.
             </p>
             <div className="ch-actions reveal d3">
               <button
@@ -625,11 +619,7 @@ function App() {
                   <path d="M8 5v14l11-7z" />
                 </svg>
               </button>
-              <a
-                href="/assets/predictive-maintenance-brochure.pdf"
-                download
-                className="btn btn-outline"
-              >
+              <a href="/Sound_cam.jpg" download className="btn btn-outline">
                 Download brochure
                 <svg
                   viewBox="0 0 24 24"
@@ -644,7 +634,7 @@ function App() {
           </div>
           <div className="panel reveal-l">
             <img
-              src="https://cdn.shopify.com/s/files/1/0710/8204/9605/files/SoundCam.jpg?v=1789105486"
+              src="/Sound_cam_4_3.jpg"
               alt="AI Predictive Maintenance Poster"
             />
           </div>
@@ -677,11 +667,7 @@ function App() {
                   <path d="M8 5v14l11-7z" />
                 </svg>
               </button>
-              <a
-                href="/assets/soundcam-case-study.pdf"
-                download
-                className="btn btn-outline"
-              >
+              <a href="/Sound_cam.jpg" download className="btn btn-outline">
                 Download case study
                 <svg
                   viewBox="0 0 24 24"
@@ -708,10 +694,7 @@ function App() {
             ></canvas> */}
             {/* <div className="corner tl"></div>
             <div className="corner br"></div> */}
-            <img
-              src="https://cdn.shopify.com/s/files/1/0710/8204/9605/files/SoundCam.jpg?v=1789105486"
-              alt="Sound Cam Poster"
-            />
+            <img src="/Sound_cam_4_3.jpg" alt="Sound Cam Poster" />
           </div>
         </div>
       </section>
