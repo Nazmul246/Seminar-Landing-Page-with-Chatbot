@@ -25,20 +25,21 @@
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 20px 18px 16px;
+  justify-content: center;
+  padding: 6px 18px 8px;
   border-bottom: 1px solid var(--line-soft);
 }
 .chat-sidebar-logo {
-  width: 36px;
-  height: 36px;
-  border-radius: 9px;
-  background: linear-gradient(155deg, var(--cyan), var(--cyan));
+  width: 90px;
+  height: 100%;
+  /* border-radius: 9px; */
+  /* background: linear-gradient(155deg, var(--cyan), var(--cyan)); */
   color: #04141b;
   display: flex;
   align-items: center;
   justify-content: center;
   flex: none;
-  box-shadow: 0 4px 14px -4px rgba(35, 213, 255, 0.5);
+  /* box-shadow: 0 4px 14px -4px rgba(35, 213, 255, 0.5); */
 }
 .chat-sidebar-logo svg {
   width: 19px;
@@ -68,11 +69,12 @@
   display: flex;
   align-items: center;
   gap: 6px;
+  flex-direction: column;
   font-family: var(--display);
   font-size: 12px;
   letter-spacing: 0.1em;
   color: var(--cyan);
-  margin-top: 4px;
+  /* margin-top: 4px; */
 }
 .chat-status-dot {
   width: 6px;
@@ -81,6 +83,12 @@
   background: var(--green);
   box-shadow: 0 0 8px var(--green);
   animation: chatStatusPulse 1.6s ease-in-out infinite;
+  display: block;
+}
+.chat-sidebar-status-text {
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
 @keyframes chatStatusPulse {
   0%,
@@ -284,6 +292,11 @@
 
   .viz-gear {
     top: 18px !important;
+  }
+
+  .mobile-flex {
+    display: flex;
+    flex-direction: column-reverse;
   }
 }
 

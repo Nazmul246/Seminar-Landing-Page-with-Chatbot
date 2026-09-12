@@ -238,7 +238,7 @@ export default function ChatPage({ onClose }) {
           value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={handleKeyDown}
-          placeholder="Message Factory AI Assistant..."
+          placeholder="Message AskAI Powered by Open AI Co., Ltd..."
           rows={1}
         />
         <button
@@ -271,21 +271,15 @@ export default function ChatPage({ onClose }) {
       )}
       <aside className={`chat-sidebar ${sidebarOpen ? "is-open" : ""}`}>
         <div className="chat-sidebar-brand">
-          <span className="chat-sidebar-logo">
-            <svg
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.8"
-            >
-              <path d="M12 2 2 7l10 5 10-5-10-5ZM2 17l10 5 10-5M2 12l10 5 10-5" />
-            </svg>
-          </span>
           <div className="chat-sidebar-brand-text">
-            <div className="chat-sidebar-brand-name">Factory AI</div>
             <div className="chat-sidebar-status">
-              <i className="chat-status-dot"></i>
-              System Online
+              <span className="chat-sidebar-logo">
+                <img src="/AskAI_logo_white.png" alt="ThaiBiz360 ERP Poster" />
+              </span>
+              <div className="chat-sidebar-status-text">
+                <i className="chat-status-dot"></i>
+                System Online
+              </div>
             </div>
           </div>
         </div>
@@ -379,7 +373,7 @@ export default function ChatPage({ onClose }) {
             </svg>
           </button>
           <div className="chat-main-title">
-            {hasMessages ? active.title : "Factory AI Assistant"}
+            {hasMessages ? active.title : "AskAI Powered by Open AI Co., Ltd"}
           </div>
           <button className="chat-icon-btn" onClick={onClose} title="Close">
             <svg

@@ -3,6 +3,7 @@ import "./App.css";
 import ChatLauncher from "./components/ChatWidget/ChatLauncher";
 
 const CONFIG = {
+  heroBg: "/openai.mp4",
   videos: {
     erp: "https://www.youtube.com/embed/eRusZfCFyR8",
     soundcam: "https://www.youtube.com/embed/cBYoJ1lnZF8",
@@ -21,6 +22,7 @@ function App() {
   const bootBarRef = useRef(null);
   const progressBarRef = useRef(null);
   const heroCanvasRef = useRef(null);
+  const heroVideoRef = useRef(null);
   const waveCanvasRef = useRef(null);
   const pulseCanvasRef = useRef(null);
   const iotCanvasRef = useRef(null);
@@ -166,6 +168,13 @@ function App() {
     return () => document.removeEventListener("keydown", onKey);
   }, []);
 
+  // ---------------- Hero background video ----------------
+  useEffect(() => {
+    const v = heroVideoRef.current;
+    if (!v) return;
+    v.play().catch(() => {});
+  }, []);
+
   // ---------------- Hero canvas particles ----------------
   useEffect(() => {
     const canvas = heroCanvasRef.current;
@@ -267,6 +276,7 @@ function App() {
   // ---------------- Maintenance pulse line ----------------
   useEffect(() => {
     const canvas = pulseCanvasRef.current;
+    if (!canvas) return;
     const ctx = canvas.getContext("2d");
     let w,
       h,
@@ -305,6 +315,7 @@ function App() {
   // ---------------- IoT node network ----------------
   useEffect(() => {
     const canvas = iotCanvasRef.current;
+    if (!canvas) return;
     const ctx = canvas.getContext("2d");
     let w, h, nodes, raf;
     function resize() {
@@ -418,7 +429,8 @@ function App() {
       <nav id="sidenav">
         <a href="#hero" data-label="INTRO" className="active"></a>
         <a href="#erp" data-label="CH.01 ERP"></a>
-        <a href="#soundcam" data-label="CH.02 SOUNDCAM"></a>
+        <a href="#predictive" data-label="CH.02 PREDICTIVE"></a>
+        <a href="#soundcam" data-label="CH.03 SOUNDCAM"></a>
         <a href="#counting" data-label="CH.03 COUNTING"></a>
         <a href="#vision" data-label="CH.04 VISION"></a>
         <a href="#sealing" data-label="CH.05 SEALING"></a>
@@ -429,13 +441,24 @@ function App() {
       </nav>
 
       <section id="hero">
+        <video
+          className="hero-bg"
+          ref={heroVideoRef}
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+          src={CONFIG.heroBg}
+        ></video>
+        <div className="hero-overlay"></div>
         <canvas ref={heroCanvasRef}></canvas>
         <div className="wrap hero-inner">
           <div className="hero-tag">
             <span className="pill">
               <i></i>SYSTEM ONLINE
             </span>
-            <span>SMART FACTORY AI SEMINAR</span>
+            <span>AN OPENAI PRODUCT SHOWCASE</span>
           </div>
           <h1 className="title">
             <span className="line">
@@ -443,27 +466,27 @@ function App() {
             </span>
             <span className="line">
               <span>
-                a story. <em className="accent">We built the</em>
+                a story. <em className="accent">OpenAI built</em>
               </span>
             </span>
             <span className="line">
-              <span className="accent">sensors that listen.</span>
+              <span className="accent">the models that listen.</span>
             </span>
           </h1>
           <p className="hero-sub reveal d2">
-            You're looking at the table screen from today's seminar. Everything
-            you saw on stage — demos, dashboards, case studies — is here, in one
-            place, ready whenever you are.
+            This is OpenAI's industrial AI showcase — ERP, Predictive Maintenance
+            and SoundCam, all running on a single factory AI stack. Everything you
+            saw on stage is live here, ready whenever you are.
           </p>
 
           <div className="hero-meta reveal d3">
             <div className="m">
-              <label>Date</label>
-              <span className="v">22 SEP 2026</span>
+              <label>Builder</label>
+              <span className="v">OpenAI</span>
             </div>
             <div className="m">
               <label>Channels</label>
-              <span className="v">08 Active</span>
+              <span className="v">09 Active</span>
             </div>
             <div className="m">
               <label>Access</label>
@@ -473,7 +496,7 @@ function App() {
 
           <div className="hero-cta reveal d4">
             <a href="#erp" className="btn btn-primary">
-              Explore the products
+              Explore OpenAI products
               <svg
                 viewBox="0 0 24 24"
                 fill="none"
@@ -510,7 +533,7 @@ function App() {
 
       <section id="erp">
         <div className="gridbg"></div>
-        <div className="wrap channel">
+        <div className="wrap channel mobile-flex">
           <div>
             <span className="ch-index reveal">
               CH.01 / 08 — ENTERPRISE RESOURCE PLANNING
@@ -535,7 +558,7 @@ function App() {
                 </svg>
               </button>
               <a
-                href="/assets/thaibiz360-brochure.pdf"
+                href="https://cdn.shopify.com/s/files/1/0710/8204/9605/files/ThaiBiz360_ERP.jpg?v=1789106039"
                 download
                 className="btn btn-outline"
               >
@@ -576,12 +599,64 @@ function App() {
         </div>
       </section>
 
-      <section id="soundcam">
+      <section id="predictive">
         <div className="gridbg"></div>
-        <div className="wrap channel rev">
+        <div className="wrap channel rev mobile-flex">
           <div>
             <span className="ch-index reveal">
-              CH.02 / 08 — ACOUSTIC ANOMALY DETECTION
+              CH.02 / 09 — PREDICTIVE MAINTENANCE
+            </span>
+            <div className="eyebrow reveal">AI PREDICTIVE MAINTENANCE</div>
+            <h2 className="ch-title reveal d1">
+              Catch a bearing wearing out before it seizes.
+            </h2>
+            <p className="ch-body reveal d2">
+              Predictive Maintenance reads vibration and thermal signatures from
+              every motor on the floor, and flags the exact moment a component
+              starts drifting from normal — days before a failure stops the line.
+            </p>
+            <div className="ch-actions reveal d3">
+              <button
+                className="btn btn-primary"
+                onClick={() => openVideo("maintenance")}
+              >
+                Watch maintenance demo
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M8 5v14l11-7z" />
+                </svg>
+              </button>
+              <a
+                href="/assets/predictive-maintenance-brochure.pdf"
+                download
+                className="btn btn-outline"
+              >
+                Download brochure
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                >
+                  <path d="M12 3v12M7 10l5 5 5-5M4 21h16" />
+                </svg>
+              </a>
+            </div>
+          </div>
+          <div className="panel reveal-l">
+            <img
+              src="https://cdn.shopify.com/s/files/1/0710/8204/9605/files/SoundCam.jpg?v=1789105486"
+              alt="AI Predictive Maintenance Poster"
+            />
+          </div>
+        </div>
+      </section>
+
+      <section id="soundcam">
+        <div className="gridbg"></div>
+        <div className="wrap channel mobile-flex">
+          <div>
+            <span className="ch-index reveal">
+              CH.03 / 09 — ACOUSTIC ANOMALY DETECTION
             </span>
             <div className="eyebrow reveal">SOUNDCAM AI</div>
             <h2 className="ch-title reveal d1">
@@ -619,7 +694,7 @@ function App() {
               </a>
             </div>
           </div>
-          <div className="panel reveal-l">
+          <div className="panel reveal-r">
             {/* <div className="hud">
               <span>MODULE / ACOUSTIC-01</span>
               <span className="live">
@@ -641,12 +716,12 @@ function App() {
         </div>
       </section>
 
-      <section id="counting" ref={countingSectionRef}>
+      {/* <section id="counting" ref={countingSectionRef}>
         <div className="gridbg"></div>
-        <div className="wrap channel">
+        <div className="wrap channel mobile-flex">
           <div>
             <span className="ch-index reveal">
-              CH.03 / 08 — AUTOMATED COUNTING
+              CH.04 / 09 — AUTOMATED COUNTING
             </span>
             <div className="eyebrow reveal">AI COUNTING SYSTEM</div>
             <h2 className="ch-title reveal d1">
@@ -695,10 +770,10 @@ function App() {
 
       <section id="vision">
         <div className="gridbg"></div>
-        <div className="wrap channel rev">
+        <div className="wrap channel rev mobile-flex">
           <div>
             <span className="ch-index reveal">
-              CH.04 / 08 — VISUAL QUALITY CONTROL
+              CH.05 / 09 — VISUAL QUALITY CONTROL
             </span>
             <div className="eyebrow reveal">AI VISION INSPECTION</div>
             <h2 className="ch-title reveal d1">
@@ -743,10 +818,10 @@ function App() {
 
       <section id="sealing">
         <div className="gridbg"></div>
-        <div className="wrap channel">
+        <div className="wrap channel mobile-flex">
           <div>
             <span className="ch-index reveal">
-              CH.05 / 08 — PACKAGE INTEGRITY
+              CH.06 / 09 — PACKAGE INTEGRITY
             </span>
             <div className="eyebrow reveal">AI SEALING INSPECTION</div>
             <h2 className="ch-title reveal d1">
@@ -799,10 +874,10 @@ function App() {
 
       <section id="maintenance">
         <div className="gridbg"></div>
-        <div className="wrap channel rev">
+        <div className="wrap channel rev mobile-flex">
           <div>
             <span className="ch-index reveal">
-              CH.06 / 08 — MACHINE HEALTH MONITORING
+              CH.07 / 09 — MACHINE HEALTH MONITORING
             </span>
             <div className="eyebrow reveal">PREDICTIVE MAINTENANCE</div>
             <h2 className="ch-title reveal d1">
@@ -874,10 +949,10 @@ function App() {
 
       <section id="dashboard">
         <div className="gridbg"></div>
-        <div className="wrap channel">
+        <div className="wrap channel mobile-flex">
           <div>
             <span className="ch-index reveal">
-              CH.07 / 08 — REAL-TIME OPERATIONS
+              CH.08 / 09 — REAL-TIME OPERATIONS
             </span>
             <div className="eyebrow reveal">SMART FACTORY DASHBOARD</div>
             <h2 className="ch-title reveal d1">
@@ -938,10 +1013,10 @@ function App() {
 
       <section id="iot">
         <div className="gridbg"></div>
-        <div className="wrap channel rev">
+        <div className="wrap channel rev mobile-flex">
           <div>
             <span className="ch-index reveal">
-              CH.08 / 08 — CONNECTED DEVICES
+              CH.09 / 09 — CONNECTED DEVICES
             </span>
             <div className="eyebrow reveal">INDUSTRIAL IOT</div>
             <h2 className="ch-title reveal d1">
@@ -996,7 +1071,7 @@ function App() {
             <div className="corner br"></div>
           </div>
         </div>
-      </section>
+      </section> */}
 
       <section id="contact">
         <div className="gridbg"></div>
