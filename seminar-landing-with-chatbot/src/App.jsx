@@ -35,7 +35,7 @@ function App() {
   // ---------------- Boot sequence ----------------
   useEffect(() => {
     const lines = [
-      "> INITIALIZING SEMINAR HUB...",
+      "> INITIALIZING PRODUCT HUB...",
       "> LOADING PRODUCT CHANNELS [8/8]",
       "> LINKING DEMOS + CASE STUDIES...",
       "> READY.",
@@ -1093,7 +1093,7 @@ function App() {
           <div className="channels reveal d4">
             <a
               className="chan-card"
-              href="https://line.me/ti/p/~yourlineid"
+              href="https://line.me/ti/p/0QJKot8Sfl"
               target="_blank"
               rel="noopener"
             >
@@ -1106,9 +1106,9 @@ function App() {
                 <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
               </svg>
               <span className="cl">LINE</span>
-              <span className="cv">@yourlineid</span>
+              <span className="cv">@openai_</span>
             </a>
-            <a className="chan-card" href="mailto:contact@yourcompany.com">
+            <a className="chan-card" href="mailto:sales@openai.co.th">
               <svg
                 viewBox="0 0 24 24"
                 fill="none"
@@ -1119,11 +1119,11 @@ function App() {
                 <path d="m4 6 8 7 8-7" />
               </svg>
               <span className="cl">Email</span>
-              <span className="cv">contact@yourcompany.com</span>
+              <span className="cv">sales@openai.co.th</span>
             </a>
             <a
               className="chan-card"
-              href="https://www.yourcompany.com"
+              href="https://www.openai.co.th"
               target="_blank"
               rel="noopener"
             >
@@ -1137,17 +1137,15 @@ function App() {
                 <path d="M3 12h18M12 3a15 15 0 0 1 0 18 15 15 0 0 1 0-18Z" />
               </svg>
               <span className="cl">Website</span>
-              <span className="cv">www.yourcompany.com</span>
+              <span className="cv">www.openai.co.th</span>
             </a>
           </div>
         </div>
       </section>
 
       <footer>
-        <div>SMART FACTORY AI SEMINAR — 22 SEPTEMBER 2026</div>
-        <div className="fline">
-          © 2026 YOUR COMPANY NAME. ALL RIGHTS RESERVED.
-        </div>
+        <div>OPENAI SMART FACTORY SOLUTIONS</div>
+        <div className="fline">© 2026 OPENAI. ALL RIGHTS RESERVED.</div>
       </footer>
 
       <div id="modal" className={activeVideo ? "open" : ""}>
