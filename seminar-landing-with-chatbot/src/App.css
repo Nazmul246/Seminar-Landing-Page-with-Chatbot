@@ -1067,27 +1067,81 @@ h1.title .accent {
 }
 .chan-card {
   border: 1px solid var(--line);
-  border-radius: 4px;
-  padding: 28px 20px;
+  border-radius: 8px;
+  padding: 26px 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 12px;
+  gap: 14px;
+  text-align: center;
+  background: var(--panel);
+  cursor: pointer;
   transition:
     border-color 0.25s ease,
     transform 0.25s ease,
-    background 0.25s ease;
-  background: var(--panel);
+    background 0.25s ease,
+    box-shadow 0.25s ease,
+    gap 0.25s ease;
+}
+.chan-card .icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  color: var(--cyan);
+}
+.chan-card .icon svg {
+  width: 22px;
+  height: 22px;
+}
+.chan-card .icon.icon-line {
+  color: var(--green);
+  border-color: rgba(53, 242, 160, 0.4);
+  background: rgba(53, 242, 160, 0.1);
+}
+.chan-card .icon.icon-web {
+  color: var(--amber);
+  border-color: rgba(255, 176, 32, 0.4);
+  background: rgba(255, 176, 32, 0.1);
+}
+.chan-card .arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  color: var(--muted-dim);
+  opacity: 0.85;
+  transition: transform 0.25s ease, color 0.25s ease, opacity 0.25s ease;
+}
+.chan-card .arrow svg {
+  width: 16px;
+  height: 16px;
 }
 .chan-card:hover {
   border-color: var(--cyan);
-  transform: translateY(-4px);
+  transform: translateY(-6px);
   background: var(--panel-2);
+  box-shadow: 0 14px 34px -10px rgba(35, 213, 255, 0.28);
+  gap: 16px;
 }
-.chan-card svg {
-  width: 26px;
-  height: 26px;
+.chan-card:hover .arrow {
   color: var(--cyan);
+  opacity: 1;
+  transform: translate(4px, -4px);
+}
+.chan-card:hover .icon {
+  box-shadow: 0 0 12px rgba(35, 213, 255, 0.35);
+}
+.chan-card:active {
+  transform: translateY(-3px);
+}
+.chan-card:focus-visible {
+  outline: 2px solid var(--cyan);
+  outline-offset: 3px;
 }
 .chan-card .cl {
   font-family: var(--mono);
@@ -1097,9 +1151,19 @@ h1.title .accent {
   color: var(--muted-dim);
 }
 .chan-card .cv {
-  font-size: 0.95rem;
+  font-size: 1rem;
+  font-weight: 600;
   color: var(--text);
   word-break: break-word;
+}
+.chan-card svg {
+  width: 26px;
+  height: 26px;
+}
+@media (max-width: 640px) {
+  .chan-card {
+    padding: 22px 18px;
+  }
 }
 
 footer {

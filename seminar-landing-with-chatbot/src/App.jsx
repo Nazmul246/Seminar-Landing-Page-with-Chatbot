@@ -1097,29 +1097,53 @@ function App() {
               target="_blank"
               rel="noopener"
             >
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.6"
-              >
-                <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
-              </svg>
+              <span className="icon icon-line">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.6"
+                >
+                  <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
+                </svg>
+              </span>
               <span className="cl">LINE</span>
               <span className="cv">@openai_</span>
+              <span className="arrow">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.6"
+                >
+                  <path d="M7 7h10v10M7 17l10-10" />
+                </svg>
+              </span>
             </a>
             <a className="chan-card" href="mailto:sales@openai.co.th">
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.6"
-              >
-                <path d="M4 4h16v16H4z" />
-                <path d="m4 6 8 7 8-7" />
-              </svg>
+              <span className="icon icon-email">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.6"
+                >
+                  <path d="M4 4h16v16H4z" />
+                  <path d="m4 6 8 7 8-7" />
+                </svg>
+              </span>
               <span className="cl">Email</span>
               <span className="cv">sales@openai.co.th</span>
+              <span className="arrow">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.6"
+                >
+                  <path d="M7 7h10v10M7 17l10-10" />
+                </svg>
+              </span>
             </a>
             <a
               className="chan-card"
@@ -1127,25 +1151,39 @@ function App() {
               target="_blank"
               rel="noopener"
             >
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.6"
-              >
-                <circle cx="12" cy="12" r="9" />
-                <path d="M3 12h18M12 3a15 15 0 0 1 0 18 15 15 0 0 1 0-18Z" />
-              </svg>
+              <span className="icon icon-web">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.6"
+                >
+                  <circle cx="12" cy="12" r="9" />
+                  <path d="M3 12h18M12 3a15 15 0 0 1 0 18 15 15 0 0 1 0-18Z" />
+                </svg>
+              </span>
               <span className="cl">Website</span>
               <span className="cv">www.openai.co.th</span>
+              <span className="arrow">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.6"
+                >
+                  <path d="M7 7h10v10M7 17l10-10" />
+                </svg>
+              </span>
             </a>
           </div>
         </div>
       </section>
 
       <footer>
-        <div>OPENAI SMART FACTORY SOLUTIONS</div>
-        <div className="fline">© 2026 OPENAI. ALL RIGHTS RESERVED.</div>
+        <div>OpenAI Co., Ltd.</div>
+        <div className="fline">
+          © 2026 OpenAI CO., Ltd. All rights reserved.
+        </div>
       </footer>
 
       <div id="modal" className={activeVideo ? "open" : ""}>
