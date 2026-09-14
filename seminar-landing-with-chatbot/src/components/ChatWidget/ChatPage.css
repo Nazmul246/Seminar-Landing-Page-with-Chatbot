@@ -160,6 +160,7 @@
 .chat-history-list {
   flex: 1;
   overflow-y: auto;
+  overscroll-behavior: contain;
   padding: 6px 10px;
   display: flex;
   flex-direction: column;
@@ -441,6 +442,7 @@
 .chat-messages {
   flex: 1;
   overflow-y: auto;
+  overscroll-behavior: contain;
   display: flex;
   flex-direction: column;
   animation: chatFadeIn 0.4s ease;

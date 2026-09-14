@@ -137,26 +137,19 @@ function App() {
     return () => obs.disconnect();
   }, []);
 
-  // ---------------- Hero title line reveal ----------------
+  // ---------------- Hero title reveal ----------------
   useEffect(() => {
-    const spans = document.querySelectorAll("#hero h1 .line span");
-    const timers = [];
-    spans.forEach((span, i) => {
-      span.style.transform = "translateY(110%)";
-      span.style.opacity = "0";
-      span.style.transition =
-        "transform .9s cubic-bezier(.16,.8,.3,1), opacity .9s ease";
-      timers.push(
-        setTimeout(
-          () => {
-            span.style.transform = "translateY(0)";
-            span.style.opacity = "1";
-          },
-          150 + i * 140,
-        ),
-      );
-    });
-    return () => timers.forEach(clearTimeout);
+    const title = document.querySelector("#hero h1.title");
+    if (!title) return;
+    title.style.transform = "translateY(110%)";
+    title.style.opacity = "0";
+    title.style.transition =
+      "transform 1s cubic-bezier(.16,.8,.3,1), opacity 1s ease";
+    const t = setTimeout(() => {
+      title.style.transform = "translateY(0)";
+      title.style.opacity = "1";
+    }, 250);
+    return () => clearTimeout(t);
   }, []);
 
   // ---------------- Video modal: Escape key ----------------
@@ -431,12 +424,12 @@ function App() {
         <a href="#erp" data-label="CH.01 ERP"></a>
         <a href="#predictive" data-label="CH.02 PREDICTIVE"></a>
         <a href="#soundcam" data-label="CH.03 SOUNDCAM"></a>
-        <a href="#counting" data-label="CH.03 COUNTING"></a>
+        {/* <a href="#counting" data-label="CH.03 COUNTING"></a>
         <a href="#vision" data-label="CH.04 VISION"></a>
         <a href="#sealing" data-label="CH.05 SEALING"></a>
         <a href="#maintenance" data-label="CH.06 MAINTENANCE"></a>
         <a href="#dashboard" data-label="CH.07 DASHBOARD"></a>
-        <a href="#iot" data-label="CH.08 IOT"></a>
+        <a href="#iot" data-label="CH.08 IOT"></a> */}
         <a href="#contact" data-label="SIGNAL / CONTACT"></a>
       </nav>
 
@@ -461,17 +454,8 @@ function App() {
             <span>AN OPENAI PRODUCT SHOWCASE</span>
           </div>
           <h1 className="title">
-            <span className="line">
-              <span>Every machine has</span>
-            </span>
-            <span className="line">
-              <span>
-                a story. <em className="accent">OpenAI built</em>
-              </span>
-            </span>
-            <span className="line">
-              <span className="accent">the models that listen.</span>
-            </span>
+            Every machine has a story. <em className="accent">OpenAI built</em>{" "}
+            the models that listen.
           </h1>
           <p className="hero-sub reveal d2">
             This is OpenAI's industrial AI showcase — ERP, Predictive
